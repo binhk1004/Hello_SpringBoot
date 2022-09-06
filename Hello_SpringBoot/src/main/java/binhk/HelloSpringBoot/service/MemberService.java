@@ -9,7 +9,11 @@ import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입
@@ -18,12 +22,12 @@ public class MemberService {
      */
     public Long join(Member member){
         //중복허용 안함
-        vaildateDuplicateMemer(member);
+        validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
     }
 
-    private void vaildateDuplicateMemer(Member member) {
+    private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
                     throw new IllegalArgumentException("이미 존재하는 회원 입니다.");
