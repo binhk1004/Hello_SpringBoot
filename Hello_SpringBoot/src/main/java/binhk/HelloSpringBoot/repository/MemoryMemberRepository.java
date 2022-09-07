@@ -1,6 +1,7 @@
 package binhk.HelloSpringBoot.repository;
 
 import binhk.HelloSpringBoot.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
